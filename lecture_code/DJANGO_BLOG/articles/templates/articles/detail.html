@@ -1,0 +1,41 @@
+{% extends 'articles/base.html'%}
+
+{% block title %}DETAIL{% endblock %}
+{% block body %}
+<h1 class="text-center">DETAIL</h1>
+<H2>{{ article.pk }}번 글</H2>
+<hr>
+<p>글 제목: {{article.title}}</p>
+<p>글 내용: {{article.content}}</p>
+<p>작성시간: {{article.created_at }}</p>
+<p>수정시간: {{article.updated_at }}</p>
+<hr>
+<form action="{% url 'articles:comment_create' article.id %}" method="POST">
+    {% csrf_token %}
+    댓글 입력: <input type="text" name="content">
+    <input type="submit" value="입력">
+</form>
+<hr>
+<h3>댓글 목록 | 현재 댓글수 : {{comments|length}}</h3>
+{% for comment in comments %}
+<ul>
+    <li>
+        {{ comment.content }}
+        <form action="{% url 'articles:comment_delete' article.id comment.id %}" style="display: inline;" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-warning btn-sm">삭제</button>
+        </form>
+    </li>
+</ul>
+<hr>
+{% empty %}
+<p>댓글이 아직 없습니다.</p>
+{% endfor %}
+<a href="{% url 'articles:update' article.pk %}" class="btn btn-primary" style="display: inline;">[EDIT]</a>
+<!-- <a href="{% url 'articles:delete' article.pk %}">[삭제하기]</a> -->
+<form action="{% url 'articles:delete' article.pk %}" method="POST" style="display: inline;">
+    {% csrf_token %}
+    <button class="btn btn-danger" onclick="return confirm('R U Sure...?!?!?!?!')">삭제</button>
+</form>
+<a href="{% url 'articles:index' %}" class="btn btn-info" style="display: inline;">[목록]</a>
+{% endblock %}

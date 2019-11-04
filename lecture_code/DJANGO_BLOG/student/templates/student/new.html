@@ -1,0 +1,14 @@
+{% extends 'student/base.html' %}
+
+{% block title %}NEW{% endblock %}
+{% block body %}
+    <h1 class = 'text-center'>NEW</h1>
+    <form action="/student/{{ student.pk }}/update/" method="POST">
+        {% csrf_token %}
+        이름: <input type="text" name='name'><br>
+        이메일: <input type="text" name='email'><br>
+        <input type="submit">
+    </form>
+    <hr>
+    <a href="/articles/">[뒤로가기]</a>
+    {% endblock %}

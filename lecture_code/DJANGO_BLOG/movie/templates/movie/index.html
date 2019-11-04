@@ -1,0 +1,16 @@
+{% extends 'movie/base.html'%}
+
+{% block title %}Movies{% endblock %}
+{% block body %}
+<H1 class="text-center">Movies</H1>
+<a href="{% url 'movie:create' %}">[새 영화 등록]</a>
+<hr>
+{% for movie in movie %}
+<p>No.{{ movie.pk }}</p>
+<p>제목: {{movie.title}}</p>
+<p>점수: {{movie.score}}</p>
+<a href="{% url 'movie:detail' movie.pk %}">글 상세보기</a>
+<a href="{% url 'movie:delete' movie.pk %}">삭제하기</a>
+<hr>
+{% endfor %}
+{% endblock %}

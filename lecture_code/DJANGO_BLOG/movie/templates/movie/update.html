@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        제목: <input type="text" name='title' value="{{movie.title}}"><br>
+        제목(영어): <input type="text" name='title_en' value="{{movie.title_en}}"><br>
+        관객 수: <input type="text" name='audience' value="{{movie.audience}}"><br>
+        개봉일: <input type="date" name='open_date' value="{{movie.open_date|date='yyyy-mm-dd'}}"><br>
+        장르: <input type="text" name='genre' value="{{movie.genre}}"><br>
+        관람등급: <input type="text" name='watch_grade' value="{{movie.watch_grade}}"><br>
+        평점: <input type="number" name='score' value="{{movie.score}}"><br>
+        포스터 url: <input type="text" name='poster_url' value="{{movie.poster_url}}"><br>
+        영화 소개: <textarea name="description" cols="30" rows="10">{{movie.title}}</textarea><br>
+        <input type="submit">
+    </form>
+    {{movie.open_date}}
+    <a href="/movies/detail/{{movie.pk}}">뒤로가기</a>
+</body>
+</html>
