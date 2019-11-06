@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'imagekit',
 
     'django_extensions',
 ]
@@ -124,3 +125,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'django_blog','assets',) # 쉼표 무조건 넣기
+]
+MEDIA_URL = '/media/' #STATIC_URL 과 비슷, 업로드된 파일의 주소(URL)
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')

@@ -3,10 +3,15 @@
 {% block title %}NEW{% endblock %}
 {% block body %}
     <h1 class = 'text-center'>EDIT</h1>
-    <form action="/articles/{{ article.pk }}/update/" method="POST">
+    {% if article.image %}
+    <IMG src="{{article.image.url}}" alt="{{article.image}}"></IMG>
+    {% else %}
+    <img src="{% static 'articles/images/no_image.jpg'%}" alt="no_image">
+    <form action="/articles/{{ article.pk }}/update/" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         제목: <input type="text" name='title' value="{{article.title}}"><br>
         내용: <textarea name="content" id="" cols="30" rows="10">{{article.content}}</textarea><br>
+        이미지: <input type="file" name="image" accept="image/*">
         <input type="submit">
     </form>
     <hr>
